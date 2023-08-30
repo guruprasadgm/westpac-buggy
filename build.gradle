@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+group 'nz.co.westpac'
+version '1.0-SNAPSHOT'
+
+ext {
+    seleniumVersion = '3.+'
+    junitVersion = '4.12'
+    appiumVersion = '7.+'
+    guiceVersion = '4.1.0'
+    assertVersion= '3.4.1'
+    slf4jVersion='1.7.26'
+}
+
+test {
+    systemProperty 'browserName', System.getProperty('browserName')
+    systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver')
+    systemProperty 'webdriver.gecko.driver', System.getProperty('webdriver.gecko.driver')
+}
+
+test.onlyIf {
+    Boolean.getBoolean('run.test')
+}
+
+dependencies {
+    compile "junit:junit:${junitVersion}"
+    compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+    compile "io.appium:java-client:${appiumVersion}"
+    compile "com.google.inject:guice:${guiceVersion}"
+    compile "org.assertj:assertj-core:${assertVersion}"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.apache.commons:commons-lang3:3.4"
+    compile "commons-io:commons-io:2.6"
+}
+
+
+
+
+
